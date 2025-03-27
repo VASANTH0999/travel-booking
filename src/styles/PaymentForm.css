@@ -1,0 +1,89 @@
+/* src/components/PaymentForm.css */
+.payment-form {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for Stripe CardElement */
+  .payment-form .StripeElement {
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .payment-form .StripeElement--focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .payment-form .StripeElement--invalid {
+    border-color: #dc3545;
+  }
+  
+  .payment-form .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+  
+  .error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .payment-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .payment-form button:hover:not(:disabled) {
+    background-color: #218838;
+  }
+  
+  .payment-form button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 576px) {
+    .payment-form {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .payment-form .StripeElement {
+      padding: 10px 12px;
+      font-size: 0.95rem;
+    }
+  
+    .payment-form button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  
+    .error {
+      font-size: 0.85rem;
+    }
+  }

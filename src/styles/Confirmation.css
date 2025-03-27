@@ -1,0 +1,131 @@
+/* src/pages/Confirmation.css */
+.confirmation-page {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: calc(100vh - 200px); /* Adjust based on navbar/footer height */
+  }
+  
+  .confirmation-page h1 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  
+  .confirmation-details {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .confirmation-details h2 {
+    color: #28a745;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .confirmation-details p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 15px 0;
+  }
+  
+  .confirmation-details p strong {
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .confirmation-details button {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirmation-details button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Print-specific styles */
+  @media print {
+    .confirmation-page {
+      box-shadow: none;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .confirmation-details {
+      box-shadow: none;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+  
+    .confirmation-details button {
+      display: none; /* Hide print button when printing */
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .confirmation-page {
+      margin: 20px;
+      padding: 15px;
+    }
+  
+    .confirmation-page h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+  
+    .confirmation-details {
+      padding: 20px;
+    }
+  
+    .confirmation-details h2 {
+      font-size: 1.6rem;
+    }
+  
+    .confirmation-details p {
+      font-size: 1rem;
+    }
+  
+    .confirmation-details button {
+      padding: 10px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .confirmation-page h1 {
+      font-size: 1.6rem;
+    }
+  
+    .confirmation-details h2 {
+      font-size: 1.4rem;
+    }
+  
+    .confirmation-details p {
+      font-size: 0.95rem;
+      margin: 10px 0;
+    }
+  
+    .confirmation-details button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+  }

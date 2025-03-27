@@ -1,0 +1,91 @@
+/* src/pages/Flights.css */
+.flights-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height */
+  }
+  
+  /* Breadcrumb Navigation */
+  .breadcrumb {
+    margin: 20px 0;
+    font-size: 0.95rem;
+  }
+  
+  .breadcrumb a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .breadcrumb a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .breadcrumb span {
+    color: #555;
+  }
+  
+  /* Page Header */
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .page-icon {
+    font-size: 2.5rem;
+    color: #2980b9;
+  }
+  
+  .page-header h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* FlightSearch inherits its own styling from FlightSearch.css */
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .flights-page {
+      padding: 15px;
+    }
+  
+    .breadcrumb {
+      font-size: 0.9rem;
+      margin: 15px 0;
+    }
+  
+    .page-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .page-icon {
+      font-size: 2rem;
+    }
+  
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .breadcrumb {
+      font-size: 0.85rem;
+    }
+  
+    .page-icon {
+      font-size: 1.8rem;
+    }
+  
+    .page-header h1 {
+      font-size: 1.6rem;
+    }
+  }

@@ -1,0 +1,126 @@
+/* src/components/CarRentalSearch.css */
+.search-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-form h3 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .search-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 150px;
+    flex: 1;
+  }
+  
+  .search-form input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .search-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .search-form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-results {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .search-result-item:hover {
+    transform: translateY(-2px);
+  }
+  
+  .result-details {
+    flex: 1;
+  }
+  
+  .result-details p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .result-details strong {
+    color: #333;
+  }
+  
+  .search-result-item button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-result-item button:hover {
+    background-color: #218838;
+  }
+  
+  h4 {
+    color: #333;
+    margin: 20px 0 10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .search-form form {
+      flex-direction: column;
+    }
+    
+    .search-form input {
+      width: 100%;
+    }
+    
+    .search-result-item {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .search-result-item button {
+      margin-top: 10px;
+    }
+  }

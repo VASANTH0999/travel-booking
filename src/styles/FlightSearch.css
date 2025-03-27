@@ -1,0 +1,194 @@
+/* src/components/FlightSearch.css */
+.search-form {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .search-form h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .search-form .form-control {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .search-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .search-form .btn {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-form .btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .error {
+    color: #dc3545;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8d7da;
+    border-radius: 6px;
+  }
+  
+  .sort-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content: flex-end;
+  }
+  
+  .sort-options label {
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .sort-options .form-select {
+    width: auto;
+    max-width: 200px;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  
+  .search-results {
+    margin-top: 20px;
+  }
+  
+  .search-result-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .search-result-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .result-image {
+    height: 100%;
+    object-fit: cover;
+    border-right: 1px solid #eee;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    color: #2980b9;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .card-text strong {
+    color: #333;
+  }
+  
+  .rating {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .rating span {
+    color: #777;
+    font-size: 0.9rem;
+    margin-left: 5px;
+  }
+  
+  .price-book {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .price-book h5 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .price-book .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .search-form {
+      padding: 15px;
+    }
+  
+    .search-form h3 {
+      font-size: 1.5rem;
+    }
+  
+    .row > .col-md-3,
+    .row > .col-md-2 {
+      margin-bottom: 15px;
+    }
+  
+    .search-result-card .row {
+      flex-direction: column;
+    }
+  
+    .result-image {
+      height: 200px;
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #eee;
+    }
+  
+    .price-book {
+      padding: 15px;
+      border-top: 1px solid #eee;
+    }
+  
+    .sort-options {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .search-form .btn {
+      font-size: 0.9rem;
+    }
+  
+    .card-title {
+      font-size: 1.2rem;
+    }
+  
+    .price-book h5 {
+      font-size: 1.3rem;
+    }
+  }

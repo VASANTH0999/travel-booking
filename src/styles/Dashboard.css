@@ -1,0 +1,145 @@
+/* src/components/Dashboard.css */
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height */
+  }
+  
+  .dashboard h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  
+  .auth-status {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .auth-status p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .auth-status a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-status a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .logout-btn {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .dashboard-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+  
+  .dashboard-link {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .dashboard-link:hover {
+    transform: translateY(-5px);
+  }
+  
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 100%;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .dashboard-link:hover .dashboard-card {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .dashboard-card h3 {
+    color: #2980b9;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  .dashboard-card p {
+    color: #777;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard {
+      padding: 20px 15px;
+    }
+  
+    .dashboard h1 {
+      font-size: 2rem;
+    }
+  
+    .auth-status p {
+      font-size: 1rem;
+    }
+  
+    .logout-btn {
+      padding: 8px 15px;
+      font-size: 0.95rem;
+    }
+  
+    .dashboard-links {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
+  
+    .dashboard-card {
+      padding: 25px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dashboard h1 {
+      font-size: 1.8rem;
+    }
+  
+    .auth-status p {
+      font-size: 0.95rem;
+    }
+  
+    .logout-btn {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+  
+    .dashboard-card h3 {
+      font-size: 1.3rem;
+    }
+  }
