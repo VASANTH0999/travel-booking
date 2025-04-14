@@ -1,8 +1,7 @@
-// src/components/HotelSearch.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/HotelSearch.css'
+import '../styles/HotelSearch.css';
 
 function HotelSearch() {
   const navigate = useNavigate();
@@ -87,7 +86,12 @@ function HotelSearch() {
                   </p>
                   <p>Price: ${hotel.price}/night</p>
                   <p>Rating: {hotel.rating}/5</p>
-                  <p>Amenities: {hotel.amenities.join(', ')}</p>
+                  <p>
+                    Amenities:{' '}
+                    {Array.isArray(hotel.amenities)
+                      ? hotel.amenities.join(', ')
+                      : JSON.parse(hotel.amenities).join(', ')}
+                  </p>
                 </div>
                 <button onClick={() => handleBookNow(hotel)}>Book Now</button>
               </li>

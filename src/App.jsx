@@ -9,6 +9,7 @@ import Confirmation from './pages/Confirmation';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+
 function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+       
       </Routes>
     </Router>
   );

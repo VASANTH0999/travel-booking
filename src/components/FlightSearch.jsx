@@ -1,4 +1,3 @@
-// src/components/FlightSearch.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Row, Col, Form, Button } from 'react-bootstrap';
@@ -162,11 +161,11 @@ function FlightSearch() {
                     <Card.Body>
                       <Card.Title>{flight.airline}</Card.Title>
                       <Card.Text>
-                        <strong>{flight.from} to {flight.to}</strong> on {flight.date}
+                        <strong>{flight.from_city} to {flight.to_city}</strong> on {flight.date}
                         <br />
                         Duration: {flight.duration}
                         <br />
-                        Departure: {flight.departureTime} | Arrival: {flight.arrivalTime}
+                        Departure: {flight.departure_time} | Arrival: {flight.arrival_time}
                       </Card.Text>
                       <div className="rating">
                         {[...Array(5)].map((_, i) => (

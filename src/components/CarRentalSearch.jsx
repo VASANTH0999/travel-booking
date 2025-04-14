@@ -1,4 +1,3 @@
-// src/components/CarRentalSearch.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -75,7 +74,12 @@ function CarRentalSearch() {
                     <strong>{car.type}</strong> by {car.company} in {car.location}
                   </p>
                   <p>Price: ${car.price}/day</p>
-                  <p>Features: {car.features.join(', ')}</p>
+                  <p>
+                    Features:{' '}
+                    {Array.isArray(car.features)
+                      ? car.features.join(', ')
+                      : JSON.parse(car.features).join(', ')}
+                  </p>
                 </div>
                 <button onClick={() => handleBookNow(car)}>Book Now</button>
               </li>

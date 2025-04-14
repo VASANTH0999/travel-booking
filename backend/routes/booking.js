@@ -1,61 +1,86 @@
-// backend/routes/booking.js
 const express = require('express');
 const router = express.Router();
 
-// Mock data for search (replace with real API integrations later)
-const mockFlights = [
-  { id: 1, from: 'NYC', to: 'LAX', price: 200, date: '2025-04-01', airline: 'Delta', duration: '5h 30m', departureTime: '08:00 AM', arrivalTime: '11:30 AM' },
-  { id: 2, from: 'LAX', to: 'NYC', price: 220, date: '2025-04-02', airline: 'American', duration: '5h 15m', departureTime: '09:00 AM', arrivalTime: '02:15 PM' },
-  { id: 3, from: 'NYC', to: 'MIA', price: 150, date: '2025-04-03', airline: 'United', duration: '3h 10m', departureTime: '07:00 AM', arrivalTime: '10:10 AM' },
-  { id: 4, from: 'MIA', to: 'LAX', price: 180, date: '2025-04-04', airline: 'JetBlue', duration: '6h 00m', departureTime: '10:00 AM', arrivalTime: '04:00 PM' },
-];
-
-const mockHotels = [
-  { id: 1, name: 'Hotel A', location: 'NYC', price: 150, checkIn: '2025-04-01', rating: 4.5, amenities: ['Free Wi-Fi', 'Pool', 'Gym'] },
-  { id: 2, name: 'Hotel B', location: 'LAX', price: 180, checkIn: '2025-04-01', rating: 4.0, amenities: ['Free Breakfast', 'Spa', 'Parking'] },
-  { id: 3, name: 'Hotel C', location: 'MIA', price: 120, checkIn: '2025-04-02', rating: 3.8, amenities: ['Free Wi-Fi', 'Pet Friendly'] },
-  { id: 4, name: 'Hotel D', location: 'NYC', price: 200, checkIn: '2025-04-03', rating: 4.7, amenities: ['Free Wi-Fi', 'Pool', 'Bar'] },
-];
-
-const mockCars = [
-  { id: 1, type: 'Economy', location: 'NYC', price: 50, pickupDate: '2025-04-01', company: 'Hertz', features: ['4 Seats', 'Automatic', 'AC'] },
-  { id: 2, type: 'SUV', location: 'LAX', price: 80, pickupDate: '2025-04-01', company: 'Enterprise', features: ['5 Seats', 'Automatic', '4WD'] },
-  { id: 3, type: 'Luxury', location: 'MIA', price: 120, pickupDate: '2025-04-02', company: 'Avis', features: ['4 Seats', 'Automatic', 'Leather Seats'] },
-  { id: 4, type: 'Compact', location: 'NYC', price: 60, pickupDate: '2025-04-03', company: 'Budget', features: ['4 Seats', 'Manual', 'AC'] },
-];
-
 // Search Flights
-router.get('/flights', (req, res) => {
+router.get('/flights', async (req, res) => {
   const { from, to, date } = req.query;
-  const results = mockFlights.filter(
-    (flight) =>
-      (!from || flight.from === from) &&
-      (!to || flight.to === to) &&
-      (!date || flight.date === date)
-  );
-  res.json(results);
+  const db = req.app.get('db');
+
+  try {
+    let query = 'SELECT * FROM flights WHERE 1=1';
+    const params = [];
+
+    if (from) {
+      query += ' AND from_city = ?';
+      params.push(from);
+    }
+    if (to) {
+      query += ' AND to_city = ?';
+      params.push(to);
+    }
+    if (date) {
+      query += ' AND date = ?';
+      params.push(date);
+    }
+
+    const [results] = await db.execute(query, params);
+    res.json(results);
+  } catch (error) {
+    console.error('Error searching flights:', error);
+    res.status(500).json({ error: 'Failed to search flights' });
+  }
 });
 
 // Search Hotels
-router.get('/hotels', (req, res) => {
+router.get('/hotels', async (req, res) => {
   const { destination, checkIn } = req.query;
-  const results = mockHotels.filter(
-    (hotel) =>
-      (!destination || hotel.location === destination) &&
-      (!checkIn || hotel.checkIn === checkIn)
-  );
-  res.json(results);
+  const db = req.app.get('db');
+
+  try {
+    let query = 'SELECT * FROM hotels WHERE 1=1';
+    const params = [];
+
+    if (destination) {
+      query += ' AND location = ?';
+      params.push(destination);
+    }
+    if (checkIn) {
+      query += ' AND check_in = ?';
+      params.push(checkIn);
+    }
+
+    const [results] = await db.execute(query, params);
+    res.json(results);
+  } catch (error) {
+    console.error('Error searching hotels:', error);
+    res.status(500).json({ error: 'Failed to search hotels' });
+  }
 });
 
 // Search Car Rentals
-router.get('/cars', (req, res) => {
+router.get('/cars', async (req, res) => {
   const { location, pickupDate } = req.query;
-  const results = mockCars.filter(
-    (car) =>
-      (!location || car.location === location) &&
-      (!pickupDate || car.pickupDate === pickupDate)
-  );
-  res.json(results);
+  const db = req.app.get('db');
+
+  try {
+    let query = 'SELECT * FROM cars WHERE 1=1';
+    const params = [];
+
+    if (location) {
+      query += ' AND location = ?';
+      params.push(location);
+    }
+    if (pickupDate) {
+      query += ' AND pickup_date = ?';
+      params.push(pickupDate);
+    }
+
+    const [results] = await db.execute(query, params);
+    res.json(results);
+  } catch (error) {
+    console.error('Error searching cars:', error);
+    res.status(500).json({ error: 'Failed to search cars' });
+  }
 });
 
 // Create a Booking and Process Payment
@@ -67,6 +92,12 @@ router.post('/book', async (req, res) => {
   console.log('Received booking request from frontend:', req.body);
 
   try {
+    // Verify user exists in profiles
+    const [user] = await db.execute('SELECT * FROM profiles WHERE user_id = ?', [userId]);
+    if (!user.length) {
+      return res.status(400).json({ success: false, error: 'User profile not found' });
+    }
+
     console.log('Creating Stripe Payment Intent with paymentMethodId:', paymentMethodId);
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,
@@ -99,6 +130,44 @@ router.post('/book', async (req, res) => {
   } catch (error) {
     console.error('Error in /book endpoint:', error.message);
     res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get User Profile
+router.get('/profile/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const db = req.app.get('db');
+
+  try {
+    const [results] = await db.execute('SELECT * FROM profiles WHERE user_id = ?', [userId]);
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+    res.json(results[0]);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    res.status(500).json({ error: 'Failed to fetch profile' });
+  }
+});
+
+// Update User Profile
+router.put('/profile/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { first_name, last_name, email, phone } = req.body;
+  const db = req.app.get('db');
+
+  try {
+    const [result] = await db.execute(
+      'UPDATE profiles SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE user_id = ?',
+      [first_name, last_name, email, phone || null, userId]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+    res.json({ success: true, message: 'Profile updated' });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
   }
 });
 
