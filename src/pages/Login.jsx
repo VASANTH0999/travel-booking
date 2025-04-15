@@ -12,6 +12,7 @@ function Login() {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +29,11 @@ function Login() {
       console.log('Login response:', response.data);
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userId', response.data.userId);
-      navigate('/');
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        navigate('/');
+      }, 1000);
     } catch (err) {
       setError(err.response?.data?.error || 'An error occurred during login');
     } finally {
@@ -39,6 +44,7 @@ function Login() {
   return (
     <div className="login-page">
       <h1>Login to Travel Booking</h1>
+      {success && <div className="success">Login successful! Redirecting...</div>}
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">Email</label>

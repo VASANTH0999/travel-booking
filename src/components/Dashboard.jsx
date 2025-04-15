@@ -1,3 +1,4 @@
+// src/pages/Dashboard.jsx
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/Dashboard.css';
@@ -6,10 +7,14 @@ import { FaPlane, FaHotel, FaCar } from 'react-icons/fa';
 function Dashboard() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
+    setTimeout(() => {
+      setIsLoggedIn(loggedIn);
+      setIsLoading(false);
+    }, 500); 
   }, []);
 
   const handleLogout = () => {
@@ -18,6 +23,10 @@ function Dashboard() {
     console.log('User logged out');
     navigate('/login');
   };
+
+  if (isLoading) {
+    return <div className="loading">Loading your journey...</div>;
+  }
 
   return (
     <div className="dashboard">
@@ -35,28 +44,28 @@ function Dashboard() {
           </>
         ) : (
           <p>
-            <Link to="/login">Sign in</Link> to unlock your travel options.
+            <Link to="/login">Log in</Link> to unlock your travel options.
           </p>
         )}
       </div>
       {isLoggedIn && (
         <div className="dashboard-links">
           <Link to="/flights" className="dashboard-link">
-            <div className="dashboard-card flights-card" data-bg-image="">
+            <div className="dashboard-card flights-card">
               <FaPlane className="card-icon" />
               <h3>Flights</h3>
               <p>Fly to your favorite destinations.</p>
             </div>
           </Link>
           <Link to="/hotels" className="dashboard-link">
-            <div className="dashboard-card hotels-card" data-bg-image="">
+            <div className="dashboard-card hotels-card">
               <FaHotel className="card-icon" />
               <h3>Hotels</h3>
               <p>Stay in comfort, wherever you go.</p>
             </div>
           </Link>
           <Link to="/car-rentals" className="dashboard-link">
-            <div className="dashboard-card car-rentals-card" data-bg-image="">
+            <div className="dashboard-card car-rentals-card">
               <FaCar className="card-icon" />
               <h3>Car Rentals</h3>
               <p>Hit the road with ease.</p>

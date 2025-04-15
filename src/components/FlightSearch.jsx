@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaSpinner, FaSearch } from 'react-icons/fa';
 import '../styles/FlightSearch.css';
 
 function FlightSearch() {
@@ -73,122 +73,143 @@ function FlightSearch() {
 
   return (
     <div className="search-form">
-      <h3>Search Flights</h3>
-      <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col md={3}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="From (e.g., NYC)"
-                value={search.from}
-                onChange={(e) => setSearch({ ...search, from: e.target.value })}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="To (e.g., LAX)"
-                value={search.to}
-                onChange={(e) => setSearch({ ...search, to: e.target.value })}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={2}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="date"
-                value={search.date}
-                onChange={(e) => setSearch({ ...search, date: e.target.value })}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={2}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="number"
-                min="1"
-                placeholder="Passengers"
-                value={search.passengers}
-                onChange={(e) => setSearch({ ...search, passengers: e.target.value })}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={2}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="Airline (e.g., Delta)"
-                value={search.airline}
-                onChange={(e) => setSearch({ ...search, airline: e.target.value })}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Button type="submit" disabled={loading} className="w-100">
-          {loading ? 'Searching...' : 'Search Flights'}
-        </Button>
-      </Form>
-      {error && <div className="error">{error}</div>}
-      {results.length > 0 && (
-        <div>
-          <div className="sort-options">
-            <label>Sort by Price: </label>
-            <Form.Select value={sortOrder} onChange={handleSortChange}>
-              <option value="asc">Low to High</option>
-              <option value="desc">High to Low</option>
-            </Form.Select>
-          </div>
-          <h4>Available Flights</h4>
-          <div className="search-results">
-            {results.map((flight) => (
-              <Card key={flight.id} className="search-result-card mb-3">
-                <Row className="g-0">
-                  <Col md={3}>
+      <Card className="search-card">
+        <Card.Body>
+          <h3 className="search-title">Embark on Your Journey</h3>
+          <Form onSubmit={handleSubmit}>
+            <Row className="g-3 align-items-end">
+              <Col md={3} sm={6}>
+                <Form.Group>
+                  <Form.Label>From</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="e.g., NYC"
+                    value={search.from}
+                    onChange={(e) => setSearch({ ...search, from: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={3} sm={6}>
+                <Form.Group>
+                  <Form.Label>To</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="e.g., LAX"
+                    value={search.to}
+                    onChange={(e) => setSearch({ ...search, to: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={2} sm={6}>
+                <Form.Group>
+                  <Form.Label>Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={search.date}
+                    onChange={(e) => setSearch({ ...search, date: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={2} sm={6}>
+                <Form.Group>
+                  <Form.Label>Passengers</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min="1"
+                    placeholder="e.g., 1"
+                    value={search.passengers}
+                    onChange={(e) => setSearch({ ...search, passengers: e.target.value })}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={2} sm={6}>
+                <Form.Group>
+                  <Form.Label>Airline</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="e.g., Delta"
+                    value={search.airline}
+                    onChange={(e) => setSearch({ ...search, airline: e.target.value })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={12} className="text-center">
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="search-button"
+                >
+                  {loading ? (
+                    <>
+                      <FaSpinner className="spin" /> Searching...
+                    </>
+                  ) : (
+                    <>
+                      <FaSearch /> Search Flights
+                    </>
+                  )}
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+          {error && <div className="error-message">{error}</div>}
+          {results.length > 0 && (
+            <div className="results-container">
+              <div className="sort-options">
+                <label>Sort by Price:</label>
+                <Form.Select value={sortOrder} onChange={handleSortChange}>
+                  <option value="asc">Low to High</option>
+                  <option value="desc">High to Low</option>
+                </Form.Select>
+              </div>
+              <h4 className="results-title">Explore Your Options</h4>
+              <div className="results-grid">
+                {results.map((flight) => (
+                  <Card key={flight.id} className="flight-card">
                     <Card.Img
-                      src="https://via.placeholder.com/150?text=Flight+Image"
-                      alt="Flight"
-                      className="result-image"
+                      variant="top"
+                      src={flight.image || "https://via.placeholder.com/300x150?text=Flight"}
+                      alt={`${flight.airline} flight`}
                     />
-                  </Col>
-                  <Col md={6}>
                     <Card.Body>
                       <Card.Title>{flight.airline}</Card.Title>
                       <Card.Text>
-                        <strong>{flight.from_city} to {flight.to_city}</strong> on {flight.date}
-                        <br />
-                        Duration: {flight.duration}
-                        <br />
+                        <strong>{flight.from_city} to {flight.to_city}</strong><br />
+                        Date: {flight.date}<br />
+                        Duration: {flight.duration}<br />
                         Departure: {flight.departure_time} | Arrival: {flight.arrival_time}
                       </Card.Text>
                       <div className="rating">
                         {[...Array(5)].map((_, i) => (
-                          <FaStar key={i} color={i < 4 ? '#ffc107' : '#e4e5e9'} />
+                          <FaStar
+                            key={i}
+                            color={i < (flight.rating || 4) ? '#ffd700' : '#d3d3d3'}
+                          />
                         ))}
-                        <span>(4.0)</span>
+                        <span>({flight.rating || 4.0})</span>
+                      </div>
+                      <div className="price-book">
+                        <h5>${flight.price}</h5>
+                        <Button
+                          variant="success"
+                          onClick={() => handleBookNow(flight)}
+                          className="book-button"
+                        >
+                          Book Now
+                        </Button>
                       </div>
                     </Card.Body>
-                  </Col>
-                  <Col md={3} className="d-flex align-items-center justify-content-center">
-                    <div className="price-book">
-                      <h5>${flight.price}</h5>
-                      <Button variant="success" onClick={() => handleBookNow(flight)}>
-                        Book Now
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </Card>
-            ))}
-          </div>
-        </div>
-      )}
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+        </Card.Body>
+      </Card>
     </div>
   );
 }

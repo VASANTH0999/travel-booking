@@ -1,20 +1,71 @@
-.dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #edf2f7;
-  font-family: Arial, sans-serif;
+/* src/styles/Dashboard.css */
+:root {
+  --primary-hue: 210;
+  --primary-color: hsl(var(--primary-hue), 100%, 50%);
+  --primary-dark: hsl(var(--primary-hue), 100%, 40%);
+  --accent-blue: hsl(210, 80%, 45%);
+  --accent-green: hsl(135, 60%, 45%);
+  --text-dark: hsl(210, 40%, 15%);
+  --text-muted: hsl(210, 20%, 50%);
+  --background-base: hsl(0, 0%, 98%);
+  --glass-bg: hsla(0, 0%, 100%, 0.1);
+  --shadow-neumorphic: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.9);
+  --shadow-elevated: 0 12px 48px rgba(0, 0, 0, 0.15);
+  --gradient-bg: linear-gradient(135deg, var(--primary-color) 0%, hsl(var(--primary-hue), 80%, 60%) 100%);
+  --transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --perspective: 1000px;
 }
+
+.dashboard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px;
+  background: var(--background-base);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+}
+
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, hsla(var(--primary-hue), 80%, 60%, 0.2) 0%, transparent 70%);
+  opacity: 0.3;
+  z-index: -2;
+  animation: particleFlow 15s infinite linear;
+}
+
+.dashboard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="15" cy="15" r="2" fill="hsla(210, 100%, 50%, 0.3)" /%3E%3Ccircle cx="40" cy="40" r="1.5" fill="hsla(210, 80%, 60%, 0.2)" /%3E%3Ccircle cx="70" cy="70" r="2.5" fill="hsla(210, 90%, 55%, 0.25)" /%3E%3C/svg%3E');
+  opacity: 0.1;
+  z-index: -3;
+  animation: drift 20s infinite linear;
+  transform: translate(-25%, -25%);
+}
+
 
 .hero-section {
   background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center;
   background-size: cover;
-  border-radius: 12px;
-  padding: 60px 20px;
+  border-radius: 20px;
+  padding: 80px 40px;
   text-align: center;
   color: white;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  overflow: hidden;
+  box-shadow: var(--shadow-neumorphic);
 }
 
 .hero-section::before {
@@ -24,68 +75,101 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+  border-radius: 20px;
   z-index: 0;
+  animation: gradientShift 10s infinite alternate;
 }
 
 .hero-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin-bottom: 15px;
   position: relative;
   z-index: 1;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, white, hsla(0, 0%, 100%, 0.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   position: relative;
   z-index: 1;
+  color: hsla(0, 0%, 100%, 0.9);
 }
 
 .auth-status {
   text-align: center;
-  margin: 20px 0 40px;
-  padding: 15px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 30px 0 60px;
+  padding: 25px;
+  background: var(--glass-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-neumorphic);
+  backdrop-filter: blur(15px);
+  transform: perspective(var(--perspective)) rotateX(2deg);
+  transition: var(--transition);
+}
+
+.auth-status:hover {
+  transform: perspective(var(--perspective)) rotateX(0deg) translateY(-5px);
+  box-shadow: var(--shadow-elevated);
 }
 
 .auth-status p {
-  font-size: 1.1rem;
-  color: #2d3748;
-  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 20px;
 }
 
 .auth-status a {
-  color: #3182ce;
+  color: var(--primary-color);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  position: relative;
 }
 
-.auth-status a:hover {
-  text-decoration: underline;
+.auth-status a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: var(--primary-dark);
+  transition: width 0.3s ease;
+}
+
+.auth-status a:hover::after {
+  width: 100%;
 }
 
 .logout-btn {
-  padding: 10px 20px;
-  background-color: #e53e3e;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #e53e3e, #c53030);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  box-shadow: var(--shadow-neumorphic);
+  transition: var(--transition);
 }
 
 .logout-btn:hover {
-  background-color: #c53030;
+  background: linear-gradient(135deg, #c53030, #9b2c2c);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elevated);
 }
+
 
 .dashboard-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  perspective: var(--perspective);
 }
 
 .dashboard-link {
@@ -93,14 +177,16 @@
 }
 
 .dashboard-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--glass-bg);
+  border-radius: 20px;
+  padding: 30px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  box-shadow: var(--shadow-neumorphic);
+  backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
+  transform: rotateX(5deg);
+  transition: var(--transition);
 }
 
 .dashboard-card::before {
@@ -112,53 +198,134 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  opacity: 0.3;
+  opacity: 0.6;
   z-index: 0;
+  transition: opacity 0.3s;
 }
 
 .flights-card::before {
-  background-image: attr(data-bg-image url);
+  background-image: url('/images/flight.jpg');
 }
 
 .hotels-card::before {
-  background-image: attr(data-bg-image url);
+  background-image: url('/images/hotel.jpg');
 }
 
 .car-rentals-card::before {
-  background-image: attr(data-bg-image url);
+  background-image: url('/images/car.jpg');
 }
 
 .dashboard-card:hover {
-  transform: translateY(-5px);
+  transform: rotateX(0deg) translateY(-10px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.dashboard-card:hover::before {
+  opacity: 0.8;
 }
 
 .card-icon {
-  font-size: 2rem;
-  color: #3182ce;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  color: var(--accent-blue);
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
+  animation: float 3s infinite ease-in-out;
 }
 
 .dashboard-card h3 {
-  font-size: 1.5rem;
-  color: #2d3748;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(45deg, var(--text-dark), var(--primary-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dashboard-card p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
   position: relative;
   z-index: 1;
 }
 
-.dashboard-card p {
-  font-size: 1rem;
-  color: #718096;
-  position: relative;
-  z-index: 1;
+/* Loading State */
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  padding: 50px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes particleFlow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); }
+}
+
+@keyframes drift {
+  0% { transform: translate(-25%, -25%) rotate(0deg); }
+  100% { transform: translate(-25%, -25%) rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes gradientShift {
+  0% { background: rgba(0, 0, 0, 0.4); }
+  100% { background: rgba(0, 0, 0, 0.2); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .dashboard {
+    padding: 30px;
+  }
+
   .hero-section {
-    padding: 40px 15px;
+    padding: 60px 30px;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-links {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 20px;
+  }
+
+  .hero-section {
+    padding: 40px 20px;
   }
 
   .hero-section h1 {
@@ -169,25 +336,23 @@
     font-size: 1rem;
   }
 
-  .dashboard-links {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section h1 {
-    font-size: 1.8rem;
+  .auth-status {
+    padding: 20px;
   }
 
   .auth-status p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .logout-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
   }
 
   .dashboard-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+  }
+
+  .card-icon {
+    font-size: 2rem;
   }
 }

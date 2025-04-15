@@ -8,7 +8,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
-  /* Style for Stripe CardElement */
   .payment-form .StripeElement {
     padding: 12px 15px;
     border: 1px solid #ced4da;
@@ -65,8 +64,7 @@
     cursor: not-allowed;
     opacity: 0.7;
   }
-  
-  /* Responsive Design */
+ 
   @media (max-width: 576px) {
     .payment-form {
       margin: 20px;

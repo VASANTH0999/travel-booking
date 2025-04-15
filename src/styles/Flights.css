@@ -1,91 +1,208 @@
-/* src/pages/Flights.css */
+/* General Page Styling */
 .flights-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #2980b9 0%, #6dd5fa 100%);
+  border-radius: 12px;
+  padding: 60px 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content h1 {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease;
+}
+
+.hero-content p {
+  color: #e0f7ff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease 0.3s;
+  animation-fill-mode: backwards;
+}
+
+.hero-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.plane-animation {
+  font-size: 5rem;
+  color: #fff;
+  position: absolute;
+  animation: flyAcross 10s linear infinite;
+}
+
+.breadcrumb {
+  margin: 20px 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #555;
+}
+
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  animation: slideInLeft 0.8s ease;
+}
+
+.page-icon {
+  font-size: 2.5rem;
+  color: #2980b9;
+  transition: transform 0.3s ease;
+}
+
+.page-header:hover .page-icon {
+  transform: rotate(20deg);
+}
+
+.page-header h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  /* Breadcrumb Navigation */
-  .breadcrumb {
-    margin: 20px 0;
-    font-size: 0.95rem;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .breadcrumb a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .breadcrumb a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .breadcrumb span {
-    color: #555;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
   }
-  
-  /* Page Header */
-  .page-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .page-icon {
-    font-size: 2.5rem;
-    color: #2980b9;
+}
+
+@keyframes flyAcross {
+  0% {
+    transform: translateX(-100%) translateY(50px);
   }
-  
-  .page-header h1 {
-    color: #2c3e50;
+  100% {
+    transform: translateX(100%) translateY(-50px);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .flights-page {
+    padding: 15px;
+  }
+
+  .hero-section {
+    padding: 40px 15px;
+  }
+
+  .hero-content h1 {
     font-size: 2.2rem;
-    font-weight: 600;
-    margin: 0;
   }
-  
-  /* FlightSearch inherits its own styling from FlightSearch.css */
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .flights-page {
-      padding: 15px;
-    }
-  
-    .breadcrumb {
-      font-size: 0.9rem;
-      margin: 15px 0;
-    }
-  
-    .page-header {
-      flex-direction: column;
-      text-align: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-  
-    .page-icon {
-      font-size: 2rem;
-    }
-  
-    .page-header h1 {
-      font-size: 1.8rem;
-    }
+
+  .hero-content p {
+    font-size: 1rem;
   }
-  
-  @media (max-width: 480px) {
-    .breadcrumb {
-      font-size: 0.85rem;
-    }
-  
-    .page-icon {
-      font-size: 1.8rem;
-    }
-  
-    .page-header h1 {
-      font-size: 1.6rem;
-    }
+
+  .plane-animation {
+    font-size: 3rem;
   }
+
+  .breadcrumb {
+    font-size: 0.9rem;
+    margin: 15px 0;
+  }
+
+  .page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .page-icon {
+    font-size: 2rem;
+  }
+
+  .page-header h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+  }
+
+  .page-icon {
+    font-size: 1.8rem;
+  }
+
+  .page-header h2 {
+    font-size: 1.6rem;
+  }
+}

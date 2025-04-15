@@ -23,8 +23,7 @@ function Register() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
-    // Client-side validation
+    
     if (!formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields.');
       setLoading(false);

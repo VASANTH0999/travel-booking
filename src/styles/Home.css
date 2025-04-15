@@ -4,7 +4,7 @@
     margin: 0 auto;
     padding: 60px 20px;
     text-align: center;
-    min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height */
+    min-height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +49,6 @@
     text-decoration: none;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .home-page {
       padding: 40px 15px;
